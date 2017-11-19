@@ -3,17 +3,17 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=basic_io
+ProjectName            :=Delay
 ConfigurationName      :=Debug
 WorkspacePath          :=C:/Users/nicla/DAT017/Lab1/Moplaborationer
-ProjectPath            :=C:/Users/nicla/DAT017/Lab1/Moplaborationer/basic_io
+ProjectPath            :=C:/Users/nicla/DAT017/Lab1/Moplaborationer/Delay
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=nicla
-Date                   :=17/11/2017
+Date                   :=19/11/2017
 CodeLitePath           :=C:/cseapp/CodeLite
 LinkerName             :=$(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-g++.exe
 SharedObjectLinkerName :=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi-g++.exe -shared -fPIC
@@ -28,11 +28,11 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName).elf
-Preprocessors          :=
+Preprocessors          :=$(PreprocessorSwitch)SIMULATOR 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :="basic_io.txt"
+ObjectsFileList        :="Delay.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := 
@@ -86,8 +86,8 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 
 PostBuild:
 	@echo Executing Post Build commands ...
-	arm-none-eabi-objcopy -S -O srec  ./Debug/basic_io.elf ./Debug/basic_io.s19
-	arm-none-eabi-objdump -D -S ./Debug/basic_io.elf > ./Debug/basic_io.dass
+	arm-none-eabi-objcopy -S -O srec  ./Debug/Delay.elf ./Debug/Delay.s19
+	arm-none-eabi-objdump -D -S ./Debug/Delay.elf > ./Debug/Delay.dass
 	@echo Done
 
 MakeIntermediateDirs:
@@ -104,7 +104,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/nicla/DAT017/Lab1/Moplaborationer/basic_io/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/nicla/DAT017/Lab1/Moplaborationer/Delay/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
 

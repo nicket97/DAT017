@@ -6,35 +6,35 @@ Disassembly of section .text:
 
 20000000 <startup>:
  */
-void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
+void startup(void) __attribute__((naked)) __attribute__((section(".start_section")));
 
-void startup ( void )
+void startup(void)
 {
-__asm volatile(
+    __asm volatile(" LDR R0,=0x2001C000\n" /* set stack */
 20000000:	4802      	ldr	r0, [pc, #8]	; (2000000c <_exit+0x4>)
 20000002:	4685      	mov	sp, r0
 20000004:	f000 f810 	bl	20000028 <main>
 
 20000008 <_exit>:
 20000008:	e7fe      	b.n	20000008 <_exit>
-	" LDR R0,=0x2001C000\n"		/* set stack */
-	" MOV SP,R0\n"
-	" BL main\n"				/* call main */
-	"_exit: B .\n"				/* never return */
-	) ;
+                   " MOV SP,R0\n"
+                   " BL main\n"   /* call main */
+                   "_exit: B .\n" /* never return */
+        );
 }
 2000000a:	46c0      	nop			; (mov r8, r8)
 2000000c:	2001c000 	andcs	ip, r1, r0
 
 20000010 <app_init>:
-void app_init(void){
+void app_init(void)
+{
 20000010:	b580      	push	{r7, lr}
 20000012:	af00      	add	r7, sp, #0
-    *((unsigned long *) 0x40020C00) = 0x00005555;
+    *((unsigned long*)0x40020C00) = 0x00005555;
 20000014:	4b02      	ldr	r3, [pc, #8]	; (20000020 <app_init+0x10>)
 20000016:	4a03      	ldr	r2, [pc, #12]	; (20000024 <app_init+0x14>)
 20000018:	601a      	str	r2, [r3, #0]
-    }
+}
 2000001a:	46c0      	nop			; (mov r8, r8)
 2000001c:	46bd      	mov	sp, r7
 2000001e:	bd80      	pop	{r7, pc}
@@ -50,19 +50,19 @@ void main(void)
     unsigned char c;
     app_init();
 2000002e:	f7ff ffef 	bl	20000010 <app_init>
-    while(1){
-       // printf("hej\n");
-        c = (unsigned char) *(( unsigned short *) 0x40021010);
+    while(1) {
+        //printf("hej\n");
+        c = (unsigned char)*((unsigned short*)0x40021010);
 20000032:	4b04      	ldr	r3, [pc, #16]	; (20000044 <main+0x1c>)
 20000034:	881a      	ldrh	r2, [r3, #0]
 20000036:	1dfb      	adds	r3, r7, #7
 20000038:	701a      	strb	r2, [r3, #0]
-        *((unsigned char *) 0x40020C14) = c;
+        *((unsigned char*)0x40020C14) = c;
 2000003a:	4a03      	ldr	r2, [pc, #12]	; (20000048 <main+0x20>)
 2000003c:	1dfb      	adds	r3, r7, #7
 2000003e:	781b      	ldrb	r3, [r3, #0]
 20000040:	7013      	strb	r3, [r2, #0]
-        c = (unsigned char) *(( unsigned short *) 0x40021010);
+        c = (unsigned char)*((unsigned short*)0x40021010);
 20000042:	e7f6      	b.n	20000032 <main+0xa>
 20000044:	40021010 	andmi	r1, r2, r0, lsl r0
 20000048:	40020c14 	andmi	r0, r2, r4, lsl ip
@@ -88,7 +88,7 @@ Disassembly of section .debug_info:
   44:	00000801 	andeq	r0, r0, r1, lsl #16
   48:	0e050000 	cdpeq	0, 0, cr0, cr5, cr0, {0}
   4c:	01000000 	mrseq	r0, (UNDEF: 0)
-  50:	00001010 	andeq	r1, r0, r0, lsl r0
+  50:	0000100f 	andeq	r1, r0, pc
   54:	00001820 	andeq	r1, r0, r0, lsr #16
   58:	059c0100 	ldreq	r0, [ip, #256]	; 0x100
   5c:	00000017 	andeq	r0, r0, r7, lsl r0
@@ -175,7 +175,7 @@ Disassembly of section .debug_line:
   58:	00010063 	andeq	r0, r1, r3, rrx
   5c:	05000000 	streq	r0, [r0, #-0]
   60:	00000002 	andeq	r0, r0, r2
-  64:	5e131920 	vnmlspl.f16	s2, s6, s1	; <UNPREDICTABLE>
+  64:	5d131920 	vldrpl.16	s2, [r3, #-64]	; 0xffffffc0	; <UNPREDICTABLE>
   68:	01000302 	tsteq	r0, r2, lsl #6
   6c:	02050001 	andeq	r0, r5, #1
   70:	20000010 	andcs	r0, r0, r0, lsl r0
