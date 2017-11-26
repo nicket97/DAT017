@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="Moplaborationer" Database="" Version="10.0.0">
   <Project Name="basic_io" Path="basic_io/basic_io.project" Active="No"/>
-  <Project Name="keypad" Path="keypad/keypad.project" Active="Yes"/>
+  <Project Name="keypad" Path="keypad/keypad.project" Active="No"/>
   <Project Name="Delay" Path="Delay/Delay.project" Active="No"/>
   <Project Name="asciidisplay" Path="asciidisplay/asciidisplay.project" Active="No"/>
   <Project Name="ascii" Path="ascii/ascii.project" Active="No"/>
+  <Project Name="graphicdisplay" Path="graphicdisplay/graphicdisplay.project" Active="No"/>
+  <Project Name="aoutoPong" Path="aoutoPong/aoutoPong.project" Active="No"/>
+  <Project Name="pong" Path="pong/pong.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
@@ -13,6 +16,9 @@
       <Project Name="Delay" ConfigName="Debug"/>
       <Project Name="asciidisplay" ConfigName="Debug"/>
       <Project Name="ascii" ConfigName="Debug"/>
+      <Project Name="graphicdisplay" ConfigName="Debug"/>
+      <Project Name="aoutoPong" ConfigName="Debug"/>
+      <Project Name="pong" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
@@ -21,6 +27,9 @@
       <Project Name="Delay" ConfigName="Release"/>
       <Project Name="asciidisplay" ConfigName="Release"/>
       <Project Name="ascii" ConfigName="Release"/>
+      <Project Name="graphicdisplay" ConfigName="Release"/>
+      <Project Name="aoutoPong" ConfigName="Release"/>
+      <Project Name="pong" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
