@@ -8,24 +8,24 @@
 #define STK_LOAD ((volatile unsigned int *)(0xE000E014))
 #define STK_VAL ((volatile unsigned int *)(0xE000E018)) 
 #define	GPIO_D			0x40020C00
-#define	GPIOD_MODER		((volatile unsigned int *)		(GPIO_D)) /*int pga att 4 bytes Šr 32 bitar*/
-#define	GPIOD_OTYPER	((volatile unsigned short *)	(GPIO_D+0x4)) /*short oga att otyper anŠnder 2 bytes vilket Šr 16 bitar.*/
-#define GPIOD_PUPDR		((volatile unsigned int *)		(GPIO_D+0xC)) /*0xC sŠger vilken offset GPIO behšver*/
+#define	GPIOD_MODER		((volatile unsigned int *)		(GPIO_D)) /*int pga att 4 bytes ÂŠr 32 bitar*/
+#define	GPIOD_OTYPER	((volatile unsigned short *)	(GPIO_D+0x4)) /*short oga att otyper anÂŠnder 2 bytes vilket ÂŠr 16 bitar.*/
+#define GPIOD_PUPDR		((volatile unsigned int *)		(GPIO_D+0xC)) /*0xC sÂŠger vilken offset GPIO behÂšver*/
 #define GPIOD_OSPEDER   ((volatile unsigned int *)      (GPIO_D+0x08))
 #define GPIOD_IDR_LOW	((volatile unsigned char *)		(GPIO_D+0x10))
-#define GPIOD_IDR_HIGH	((volatile unsigned char *)		(GPIO_D+0x11)) /*om man vill kolla high mŒste man ha offset 11*/
+#define GPIOD_IDR_HIGH	((volatile unsigned char *)		(GPIO_D+0x11)) /*om man vill kolla high mÂŒste man ha offset 11*/
 #define GPIOD_ODR_LOW	((volatile unsigned char *)		(GPIO_D+0x14))
-#define GPIOD_ODR_HIGH	((volatile unsigned char *)		(GPIO_D+0x15)) /*om man vill kolla high mŒste man ha offset 15*/
+#define GPIOD_ODR_HIGH	((volatile unsigned char *)		(GPIO_D+0x15)) /*om man vill kolla high mÂŒste man ha offset 15*/
 
 #define	GPIO_E			0x40021000
-#define	GPIOE_MODER		((volatile unsigned int *)		(GPIO_E)) /*int pga att 4 bytes Šr 32 bitar*/
-#define	GPIOE_OTYPER	((volatile unsigned short *)	(GPIO_E+0x4)) /*short oga att otyper anŠnder 2 bytes vilket Šr 16 bitar.*/
-#define GPIOE_PUPDR		((volatile unsigned int *)		(GPIO_E+0xC)) /*0xC sŠger vilken offset GPIO behšver*/
+#define	GPIOE_MODER		((volatile unsigned int *)		(GPIO_E)) /*int pga att 4 bytes ÂŠr 32 bitar*/
+#define	GPIOE_OTYPER	((volatile unsigned short *)	(GPIO_E+0x4)) /*short oga att otyper anÂŠnder 2 bytes vilket ÂŠr 16 bitar.*/
+#define GPIOE_PUPDR		((volatile unsigned int *)		(GPIO_E+0xC)) /*0xC sÂŠger vilken offset GPIO behÂšver*/
 #define GPIOE_OSPEDER   ((volatile unsigned int *)      (GPIO_E+0x08))
 #define GPIOE_IDR_LOW	((volatile unsigned char *)		(GPIO_E+0x10))
-#define GPIOE_IDR_HIGH	((volatile unsigned char *)		(GPIO_E+0x11)) /*om man vill kolla high mŒste man ha offset 11*/
+#define GPIOE_IDR_HIGH	((volatile unsigned char *)		(GPIO_E+0x11)) /*om man vill kolla high mÂŒste man ha offset 11*/
 #define GPIOE_ODR_LOW	((volatile unsigned char *)		(GPIO_E+0x14))
-#define GPIOE_ODR_HIGH	((volatile unsigned char *)		(GPIO_E+0x15)) /*om man vill kolla high mŒste man ha offset 15*/
+#define GPIOE_ODR_HIGH	((volatile unsigned char *)		(GPIO_E+0x15)) /*om man vill kolla high mÂŒste man ha offset 15*/
 
 
 #define B_E 0x40 // Enable
@@ -57,16 +57,16 @@ __asm volatile(
 }
 void init_app(void){
     *GPIOE_MODER = 0x55555555;
-	/*sŠtter vŒra in och ut portar*/
-	*GPIOE_OTYPER = 0x70;
-	*GPIOE_PUPDR = 0x0AA;
-	*GPIOE_ODR_HIGH = *GPIOE_ODR_HIGH & 0x00FF;
+	/*sÂŠtter vÂŒra in och ut portar*/
+	//*GPIOE_OTYPER = 0x70;
+	//*GPIOE_PUPDR = 0x0AA;
+	//*GPIOE_ODR_HIGH = *GPIOE_ODR_HIGH & 0x00FF;
     }
 void main(void)
 {
    init_app();
     graphic_initialize();
-    graphic_clear_screen();// simulator onely
+    graphic_clear_screen();
 for(int i = 0; i < 128; i++){
     pixel(i,10,1);
     }

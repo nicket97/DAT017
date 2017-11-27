@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ pong - Debug ]----------"
-	@cd "pong" && "$(MAKE)" -f  "pong.mk" && "$(MAKE)" -f  "pong.mk" PostBuild
+	@echo "----------Building project:[ graphicdisplay - Debug ]----------"
+	@cd "graphicdisplay" && "$(MAKE)" -f  "graphicdisplay.mk" && "$(MAKE)" -f  "graphicdisplay.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ pong - Debug ]----------"
-	@cd "pong" && "$(MAKE)" -f  "pong.mk" clean
+	@echo "----------Cleaning project:[ graphicdisplay - Debug ]----------"
+	@cd "graphicdisplay" && "$(MAKE)" -f  "graphicdisplay.mk" clean

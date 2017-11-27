@@ -6,8 +6,8 @@
   <Project Name="asciidisplay" Path="asciidisplay/asciidisplay.project" Active="No"/>
   <Project Name="ascii" Path="ascii/ascii.project" Active="No"/>
   <Project Name="graphicdisplay" Path="graphicdisplay/graphicdisplay.project" Active="No"/>
-  <Project Name="aoutoPong" Path="aoutoPong/aoutoPong.project" Active="No"/>
-  <Project Name="pong" Path="pong/pong.project" Active="Yes"/>
+  <Project Name="aoutoPong" Path="aoutoPong/aoutoPong.project" Active="Yes"/>
+  <Project Name="pong" Path="pong/pong.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
