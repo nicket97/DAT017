@@ -6,8 +6,14 @@
   <Project Name="asciidisplay" Path="asciidisplay/asciidisplay.project" Active="No"/>
   <Project Name="ascii" Path="ascii/ascii.project" Active="No"/>
   <Project Name="graphicdisplay" Path="graphicdisplay/graphicdisplay.project" Active="No"/>
-  <Project Name="aoutoPong" Path="aoutoPong/aoutoPong.project" Active="Yes"/>
+  <Project Name="aoutoPong" Path="aoutoPong/aoutoPong.project" Active="No"/>
   <Project Name="pong" Path="pong/pong.project" Active="No"/>
+  <Project Name="unaligned" Path="unaligned/unaligned.project" Active="No"/>
+  <Project Name="SystTick" Path="SystTick/SystTick.project" Active="No"/>
+  <Project Name="flipflop_irq" Path="flipflop_irq/flipflop_irq.project" Active="No"/>
+  <Project Name="flipflop_irq_ack" Path="flipflop_irq_ack/flipflop_irq_ack.project" Active="No"/>
+  <Project Name="flip_flop_irq_vectored" Path="flip_flop_irq_vectored/flip_flop_irq_vectored.project" Active="Yes"/>
+  <Project Name="flipflop_irq_ack_2" Path="flipflop_irq_ack_2/flipflop_irq_ack_2.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
@@ -19,6 +25,12 @@
       <Project Name="graphicdisplay" ConfigName="Debug"/>
       <Project Name="aoutoPong" ConfigName="Debug"/>
       <Project Name="pong" ConfigName="Debug"/>
+      <Project Name="unaligned" ConfigName="Debug"/>
+      <Project Name="SystTick" ConfigName="Debug"/>
+      <Project Name="flipflop_irq" ConfigName="Debug"/>
+      <Project Name="flipflop_irq_ack" ConfigName="Debug"/>
+      <Project Name="flip_flop_irq_vectored" ConfigName="Debug"/>
+      <Project Name="flipflop_irq_ack_2" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
@@ -30,6 +42,12 @@
       <Project Name="graphicdisplay" ConfigName="Release"/>
       <Project Name="aoutoPong" ConfigName="Release"/>
       <Project Name="pong" ConfigName="Release"/>
+      <Project Name="unaligned" ConfigName="Release"/>
+      <Project Name="SystTick" ConfigName="Release"/>
+      <Project Name="flipflop_irq" ConfigName="Release"/>
+      <Project Name="flipflop_irq_ack" ConfigName="Release"/>
+      <Project Name="flip_flop_irq_vectored" ConfigName="Release"/>
+      <Project Name="flipflop_irq_ack_2" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

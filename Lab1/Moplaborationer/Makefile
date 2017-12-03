@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ graphicdisplay - Debug ]----------"
-	@cd "graphicdisplay" && "$(MAKE)" -f  "graphicdisplay.mk" && "$(MAKE)" -f  "graphicdisplay.mk" PostBuild
+	@echo "----------Building project:[ flip_flop_irq_vectored - Debug ]----------"
+	@cd "flip_flop_irq_vectored" && "$(MAKE)" -f  "flip_flop_irq_vectored.mk" && "$(MAKE)" -f  "flip_flop_irq_vectored.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ graphicdisplay - Debug ]----------"
-	@cd "graphicdisplay" && "$(MAKE)" -f  "graphicdisplay.mk" clean
+	@echo "----------Cleaning project:[ flip_flop_irq_vectored - Debug ]----------"
+	@cd "flip_flop_irq_vectored" && "$(MAKE)" -f  "flip_flop_irq_vectored.mk" clean

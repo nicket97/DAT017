@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Session Name="C:\Users\nicla\DAT017\Lab1\Moplaborationer\Moplaborationer.workspace">
-  <int Value="0" Name="m_selectedTab"/>
+  <int Value="6" Name="m_selectedTab"/>
   <wxString Value="C:\Users\nicla\DAT017\Lab1\Moplaborationer\Moplaborationer.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\nicla\DAT017\Lab1\Moplaborationer\keypad\startup.c" Name="FileName"/>
       <int Value="64" Name="FirstVisibleLine"/>
-      <int Value="66" Name="CurrentLine"/>
+      <int Value="69" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
@@ -14,13 +14,6 @@
       <wxString Value="C:\Users\nicla\DAT017\Lab1\Moplaborationer\Delay\startup.c" Name="FileName"/>
       <int Value="63" Name="FirstVisibleLine"/>
       <int Value="84" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="Untitled1" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="0" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
@@ -33,7 +26,28 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\nicla\DAT017\Lab1\Moplaborationer\ascii\startup.c" Name="FileName"/>
-      <int Value="55" Name="FirstVisibleLine"/>
+      <int Value="108" Name="FirstVisibleLine"/>
+      <int Value="140" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\nicla\DAT017\Lab1\Moplaborationer\pong\startup.c" Name="FileName"/>
+      <int Value="127" Name="FirstVisibleLine"/>
+      <int Value="140" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\nicla\DAT017\Lab1\Moplaborationer\graphicdisplay\startup.c" Name="FileName"/>
+      <int Value="273" Name="FirstVisibleLine"/>
+      <int Value="292" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\nicla\DAT017\Lab1\Moplaborationer\aoutoPong\startup.c" Name="FileName"/>
+      <int Value="112" Name="FirstVisibleLine"/>
       <int Value="140" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>

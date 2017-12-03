@@ -136,9 +136,9 @@ __asm volatile(
 void init_app(void){
     *GPIOE_MODER = 0x55555555;
 	/*sätter våra in och ut portar*/
-	*GPIOE_OTYPER = 0x70;
-	*GPIOE_PUPDR = 0x0AA;
-	*GPIOE_ODR_HIGH = *GPIOE_ODR_HIGH & 0x00FF;
+	//*GPIOE_OTYPER = 0x70;
+	//*GPIOE_PUPDR = 0x0AA;
+	//*GPIOE_ODR_HIGH = *GPIOE_ODR_HIGH & 0x00FF;
     
     *GPIOD_MODER = 0x55005555;
 	/*sätter våra in och ut portar*/
