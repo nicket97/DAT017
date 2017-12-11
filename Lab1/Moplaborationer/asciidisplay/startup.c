@@ -45,7 +45,10 @@ __asm volatile(
 void main(void)
 {
     char *s;
-    char test1[] =
+    char test1[] = {'H','E','J'};
+    for(int i = 0; i < 3; i++){
+        ascii_write_cmd(test1[i]);
+        }
 }
 void delay_250ns(void){
     

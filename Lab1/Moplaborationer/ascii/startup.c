@@ -142,11 +142,11 @@ unsigned char ascii_read_status(void)
 unsigned char ascii_read_data ( void ) 
 {
 	unsigned char c;
-	*GPIO_MODER = 0x00005555;
+	*portModer = 0x00005555;
 	ascii_ctrl_bit_set(B_RW);
 	ascii_ctrl_bit_set(B_RS);
 	c = ascii_read_controller();
-	*GPIO_MODER = 0x55555555; /*sätt portE bit15-bit8 som utgångar*/
+	*portModer = 0x55555555; /*sätt portE bit15-bit8 som utgångar*/
 	return c;
 }
 

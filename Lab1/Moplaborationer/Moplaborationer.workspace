@@ -12,8 +12,10 @@
   <Project Name="SystTick" Path="SystTick/SystTick.project" Active="No"/>
   <Project Name="flipflop_irq" Path="flipflop_irq/flipflop_irq.project" Active="No"/>
   <Project Name="flipflop_irq_ack" Path="flipflop_irq_ack/flipflop_irq_ack.project" Active="No"/>
-  <Project Name="flip_flop_irq_vectored" Path="flip_flop_irq_vectored/flip_flop_irq_vectored.project" Active="Yes"/>
+  <Project Name="flip_flop_irq_vectored" Path="flip_flop_irq_vectored/flip_flop_irq_vectored.project" Active="No"/>
   <Project Name="flipflop_irq_ack_2" Path="flipflop_irq_ack_2/flipflop_irq_ack_2.project" Active="No"/>
+  <Project Name="Lab5" Path="Lab5/Lab5.project" Active="Yes"/>
+  <Project Name="pong_working" Path="pong_working/pong_working.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
@@ -31,6 +33,8 @@
       <Project Name="flipflop_irq_ack" ConfigName="Debug"/>
       <Project Name="flip_flop_irq_vectored" ConfigName="Debug"/>
       <Project Name="flipflop_irq_ack_2" ConfigName="Debug"/>
+      <Project Name="Lab5" ConfigName="Debug"/>
+      <Project Name="pong_working" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
@@ -48,6 +52,8 @@
       <Project Name="flipflop_irq_ack" ConfigName="Release"/>
       <Project Name="flip_flop_irq_vectored" ConfigName="Release"/>
       <Project Name="flipflop_irq_ack_2" ConfigName="Release"/>
+      <Project Name="Lab5" ConfigName="Release"/>
+      <Project Name="pong_working" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

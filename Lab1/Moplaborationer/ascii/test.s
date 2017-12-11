@@ -685,459 +685,526 @@
  564              		.cfi_endproc
  565              	.LFE10:
  567              		.align	1
- 568              		.global	ascii_wait_ready
+ 568              		.global	ascii_read_data
  569              		.syntax unified
  570              		.code	16
  571              		.thumb_func
  572              		.fpu softvfp
- 574              	ascii_wait_ready:
+ 574              	ascii_read_data:
  575              	.LFB11:
- 142:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
- 143:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_wait_ready( void )
- 144:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
- 576              		.loc 1 144 0
+ 142:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** unsigned char ascii_read_data ( void ) 
+ 143:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
+ 576              		.loc 1 143 0
  577              		.cfi_startproc
- 578              		@ args = 0, pretend = 0, frame = 0
+ 578              		@ args = 0, pretend = 0, frame = 8
  579              		@ frame_needed = 1, uses_anonymous_args = 0
- 580 0204 80B5     		push	{r7, lr}
- 581              		.cfi_def_cfa_offset 8
- 582              		.cfi_offset 7, -8
- 583              		.cfi_offset 14, -4
- 584 0206 00AF     		add	r7, sp, #0
- 585              		.cfi_def_cfa_register 7
- 145:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while( ( ascii_read_status() & 0x80) == 0x80) ;
- 586              		.loc 1 145 0
- 587 0208 C046     		nop
- 588              	.L30:
- 589              		.loc 1 145 0 is_stmt 0 discriminator 1
- 590 020a FFF7FEFF 		bl	ascii_read_status
- 591 020e 0300     		movs	r3, r0
- 592 0210 1A00     		movs	r2, r3
- 593 0212 8023     		movs	r3, #128
- 594 0214 1340     		ands	r3, r2
- 595 0216 802B     		cmp	r3, #128
- 596 0218 F7D0     		beq	.L30
- 146:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(8);
- 597              		.loc 1 146 0 is_stmt 1
- 598 021a 0820     		movs	r0, #8
- 599 021c FFF7FEFF 		bl	delay_mikro
- 147:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
- 600              		.loc 1 147 0
- 601 0220 C046     		nop
- 602 0222 BD46     		mov	sp, r7
- 603              		@ sp needed
- 604 0224 80BD     		pop	{r7, pc}
- 605              		.cfi_endproc
- 606              	.LFE11:
- 608              		.align	1
- 609              		.global	ascii_write_char
- 610              		.syntax unified
- 611              		.code	16
- 612              		.thumb_func
- 613              		.fpu softvfp
- 615              	ascii_write_char:
- 616              	.LFB12:
- 148:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
- 149:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_write_char(unsigned char c)
- 150:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
- 617              		.loc 1 150 0
- 618              		.cfi_startproc
- 619              		@ args = 0, pretend = 0, frame = 8
- 620              		@ frame_needed = 1, uses_anonymous_args = 0
- 621 0226 80B5     		push	{r7, lr}
- 622              		.cfi_def_cfa_offset 8
- 623              		.cfi_offset 7, -8
- 624              		.cfi_offset 14, -4
- 625 0228 82B0     		sub	sp, sp, #8
- 626              		.cfi_def_cfa_offset 16
- 627 022a 00AF     		add	r7, sp, #0
- 628              		.cfi_def_cfa_register 7
- 629 022c 0200     		movs	r2, r0
- 630 022e FB1D     		adds	r3, r7, #7
- 631 0230 1A70     		strb	r2, [r3]
- 151:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
- 632              		.loc 1 151 0
- 633 0232 FFF7FEFF 		bl	ascii_wait_ready
- 152:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_data(c);
- 634              		.loc 1 152 0
- 635 0236 FB1D     		adds	r3, r7, #7
- 636 0238 1B78     		ldrb	r3, [r3]
- 637 023a 1800     		movs	r0, r3
- 638 023c FFF7FEFF 		bl	ascii_write_data
- 153:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
- 639              		.loc 1 153 0
- 640 0240 2720     		movs	r0, #39
- 641 0242 FFF7FEFF 		bl	delay_mikro
- 154:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     
- 155:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
- 642              		.loc 1 155 0
- 643 0246 C046     		nop
- 644 0248 BD46     		mov	sp, r7
- 645 024a 02B0     		add	sp, sp, #8
- 646              		@ sp needed
- 647 024c 80BD     		pop	{r7, pc}
- 648              		.cfi_endproc
- 649              	.LFE12:
- 651              		.align	1
- 652              		.global	ascii_init
- 653              		.syntax unified
- 654              		.code	16
- 655              		.thumb_func
- 656              		.fpu softvfp
- 658              	ascii_init:
- 659              	.LFB13:
- 156:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
- 157:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_init(void)
- 158:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
- 660              		.loc 1 158 0
- 661              		.cfi_startproc
- 662              		@ args = 0, pretend = 0, frame = 0
- 663              		@ frame_needed = 1, uses_anonymous_args = 0
- 664 024e 80B5     		push	{r7, lr}
- 665              		.cfi_def_cfa_offset 8
- 666              		.cfi_offset 7, -8
- 667              		.cfi_offset 14, -4
- 668 0250 00AF     		add	r7, sp, #0
- 669              		.cfi_def_cfa_register 7
- 159:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
- 670              		.loc 1 159 0
- 671 0252 FFF7FEFF 		bl	ascii_wait_ready
- 160:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 0x0C);    /*display on*/
- 672              		.loc 1 160 0
- 673 0256 0C20     		movs	r0, #12
- 674 0258 FFF7FEFF 		bl	ascii_write_cmd
- 161:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
- 675              		.loc 1 161 0
- 676 025c 2720     		movs	r0, #39
- 677 025e FFF7FEFF 		bl	delay_mikro
- 162:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
- 678              		.loc 1 162 0
- 679 0262 FFF7FEFF 		bl	ascii_wait_ready
- 163:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 0x38);    /*function set*/
- 680              		.loc 1 163 0
- 681 0266 3820     		movs	r0, #56
- 682 0268 FFF7FEFF 		bl	ascii_write_cmd
- 164:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
- 683              		.loc 1 164 0
- 684 026c 2720     		movs	r0, #39
- 685 026e FFF7FEFF 		bl	delay_mikro
- 165:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
- 686              		.loc 1 165 0
- 687 0272 FFF7FEFF 		bl	ascii_wait_ready
- 166:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 1 );    /*clear display*/
- 688              		.loc 1 166 0
- 689 0276 0120     		movs	r0, #1
- 690 0278 FFF7FEFF 		bl	ascii_write_cmd
- 167:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_milli(2);
- 691              		.loc 1 167 0
- 692 027c 0220     		movs	r0, #2
- 693 027e FFF7FEFF 		bl	delay_milli
- 168:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
- 694              		.loc 1 168 0
- 695 0282 FFF7FEFF 		bl	ascii_wait_ready
- 169:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 6 );    /*entry mode set*/
- 696              		.loc 1 169 0
- 697 0286 0620     		movs	r0, #6
- 698 0288 FFF7FEFF 		bl	ascii_write_cmd
- 170:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
- 699              		.loc 1 170 0
- 700 028c 2720     		movs	r0, #39
- 701 028e FFF7FEFF 		bl	delay_mikro
- 171:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
- 702              		.loc 1 171 0
- 703 0292 C046     		nop
- 704 0294 BD46     		mov	sp, r7
+ 580 0204 90B5     		push	{r4, r7, lr}
+ 581              		.cfi_def_cfa_offset 12
+ 582              		.cfi_offset 4, -12
+ 583              		.cfi_offset 7, -8
+ 584              		.cfi_offset 14, -4
+ 585 0206 83B0     		sub	sp, sp, #12
+ 586              		.cfi_def_cfa_offset 24
+ 587 0208 00AF     		add	r7, sp, #0
+ 588              		.cfi_def_cfa_register 7
+ 144:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 	unsigned char c;
+ 145:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 	*portModer = 0x00005555;
+ 589              		.loc 1 145 0
+ 590 020a 0B4B     		ldr	r3, .L31
+ 591 020c 0B4A     		ldr	r2, .L31+4
+ 592 020e 1A60     		str	r2, [r3]
+ 146:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 	ascii_ctrl_bit_set(B_RW);
+ 593              		.loc 1 146 0
+ 594 0210 0220     		movs	r0, #2
+ 595 0212 FFF7FEFF 		bl	ascii_ctrl_bit_set
+ 147:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 	ascii_ctrl_bit_set(B_RS);
+ 596              		.loc 1 147 0
+ 597 0216 0120     		movs	r0, #1
+ 598 0218 FFF7FEFF 		bl	ascii_ctrl_bit_set
+ 148:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 	c = ascii_read_controller();
+ 599              		.loc 1 148 0
+ 600 021c FC1D     		adds	r4, r7, #7
+ 601 021e FFF7FEFF 		bl	ascii_read_controller
+ 602 0222 0300     		movs	r3, r0
+ 603 0224 2370     		strb	r3, [r4]
+ 149:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 	*portModer = 0x55555555; /*sätt portE bit15-bit8 som utgångar*/
+ 604              		.loc 1 149 0
+ 605 0226 044B     		ldr	r3, .L31
+ 606 0228 054A     		ldr	r2, .L31+8
+ 607 022a 1A60     		str	r2, [r3]
+ 150:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 	return c;
+ 608              		.loc 1 150 0
+ 609 022c FB1D     		adds	r3, r7, #7
+ 610 022e 1B78     		ldrb	r3, [r3]
+ 151:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
+ 611              		.loc 1 151 0
+ 612 0230 1800     		movs	r0, r3
+ 613 0232 BD46     		mov	sp, r7
+ 614 0234 03B0     		add	sp, sp, #12
+ 615              		@ sp needed
+ 616 0236 90BD     		pop	{r4, r7, pc}
+ 617              	.L32:
+ 618              		.align	2
+ 619              	.L31:
+ 620 0238 00100240 		.word	1073876992
+ 621 023c 55550000 		.word	21845
+ 622 0240 55555555 		.word	1431655765
+ 623              		.cfi_endproc
+ 624              	.LFE11:
+ 626              		.align	1
+ 627              		.global	ascii_wait_ready
+ 628              		.syntax unified
+ 629              		.code	16
+ 630              		.thumb_func
+ 631              		.fpu softvfp
+ 633              	ascii_wait_ready:
+ 634              	.LFB12:
+ 152:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
+ 153:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_wait_ready( void )
+ 154:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
+ 635              		.loc 1 154 0
+ 636              		.cfi_startproc
+ 637              		@ args = 0, pretend = 0, frame = 0
+ 638              		@ frame_needed = 1, uses_anonymous_args = 0
+ 639 0244 80B5     		push	{r7, lr}
+ 640              		.cfi_def_cfa_offset 8
+ 641              		.cfi_offset 7, -8
+ 642              		.cfi_offset 14, -4
+ 643 0246 00AF     		add	r7, sp, #0
+ 644              		.cfi_def_cfa_register 7
+ 155:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while( ( ascii_read_status() & 0x80) == 0x80) ;
+ 645              		.loc 1 155 0
+ 646 0248 C046     		nop
+ 647              	.L34:
+ 648              		.loc 1 155 0 is_stmt 0 discriminator 1
+ 649 024a FFF7FEFF 		bl	ascii_read_status
+ 650 024e 0300     		movs	r3, r0
+ 651 0250 1A00     		movs	r2, r3
+ 652 0252 8023     		movs	r3, #128
+ 653 0254 1340     		ands	r3, r2
+ 654 0256 802B     		cmp	r3, #128
+ 655 0258 F7D0     		beq	.L34
+ 156:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(8);
+ 656              		.loc 1 156 0 is_stmt 1
+ 657 025a 0820     		movs	r0, #8
+ 658 025c FFF7FEFF 		bl	delay_mikro
+ 157:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
+ 659              		.loc 1 157 0
+ 660 0260 C046     		nop
+ 661 0262 BD46     		mov	sp, r7
+ 662              		@ sp needed
+ 663 0264 80BD     		pop	{r7, pc}
+ 664              		.cfi_endproc
+ 665              	.LFE12:
+ 667              		.align	1
+ 668              		.global	ascii_write_char
+ 669              		.syntax unified
+ 670              		.code	16
+ 671              		.thumb_func
+ 672              		.fpu softvfp
+ 674              	ascii_write_char:
+ 675              	.LFB13:
+ 158:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
+ 159:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_write_char(unsigned char c)
+ 160:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
+ 676              		.loc 1 160 0
+ 677              		.cfi_startproc
+ 678              		@ args = 0, pretend = 0, frame = 8
+ 679              		@ frame_needed = 1, uses_anonymous_args = 0
+ 680 0266 80B5     		push	{r7, lr}
+ 681              		.cfi_def_cfa_offset 8
+ 682              		.cfi_offset 7, -8
+ 683              		.cfi_offset 14, -4
+ 684 0268 82B0     		sub	sp, sp, #8
+ 685              		.cfi_def_cfa_offset 16
+ 686 026a 00AF     		add	r7, sp, #0
+ 687              		.cfi_def_cfa_register 7
+ 688 026c 0200     		movs	r2, r0
+ 689 026e FB1D     		adds	r3, r7, #7
+ 690 0270 1A70     		strb	r2, [r3]
+ 161:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
+ 691              		.loc 1 161 0
+ 692 0272 FFF7FEFF 		bl	ascii_wait_ready
+ 162:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_data(c);
+ 693              		.loc 1 162 0
+ 694 0276 FB1D     		adds	r3, r7, #7
+ 695 0278 1B78     		ldrb	r3, [r3]
+ 696 027a 1800     		movs	r0, r3
+ 697 027c FFF7FEFF 		bl	ascii_write_data
+ 163:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
+ 698              		.loc 1 163 0
+ 699 0280 2720     		movs	r0, #39
+ 700 0282 FFF7FEFF 		bl	delay_mikro
+ 164:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     
+ 165:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
+ 701              		.loc 1 165 0
+ 702 0286 C046     		nop
+ 703 0288 BD46     		mov	sp, r7
+ 704 028a 02B0     		add	sp, sp, #8
  705              		@ sp needed
- 706 0296 80BD     		pop	{r7, pc}
+ 706 028c 80BD     		pop	{r7, pc}
  707              		.cfi_endproc
  708              	.LFE13:
  710              		.align	1
- 711              		.global	ascii_gotoxy
+ 711              		.global	ascii_init
  712              		.syntax unified
  713              		.code	16
  714              		.thumb_func
  715              		.fpu softvfp
- 717              	ascii_gotoxy:
+ 717              	ascii_init:
  718              	.LFB14:
- 172:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
- 173:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_gotoxy( unsigned char x, unsigned char y)
- 174:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
- 719              		.loc 1 174 0
+ 166:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
+ 167:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_init(void)
+ 168:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
+ 719              		.loc 1 168 0
  720              		.cfi_startproc
- 721              		@ args = 0, pretend = 0, frame = 16
+ 721              		@ args = 0, pretend = 0, frame = 0
  722              		@ frame_needed = 1, uses_anonymous_args = 0
- 723 0298 80B5     		push	{r7, lr}
+ 723 028e 80B5     		push	{r7, lr}
  724              		.cfi_def_cfa_offset 8
  725              		.cfi_offset 7, -8
  726              		.cfi_offset 14, -4
- 727 029a 84B0     		sub	sp, sp, #16
- 728              		.cfi_def_cfa_offset 24
- 729 029c 00AF     		add	r7, sp, #0
- 730              		.cfi_def_cfa_register 7
- 731 029e 0200     		movs	r2, r0
- 732 02a0 FB1D     		adds	r3, r7, #7
- 733 02a2 1A70     		strb	r2, [r3]
- 734 02a4 BB1D     		adds	r3, r7, #6
- 735 02a6 0A1C     		adds	r2, r1, #0
- 736 02a8 1A70     		strb	r2, [r3]
+ 727 0290 00AF     		add	r7, sp, #0
+ 728              		.cfi_def_cfa_register 7
+ 169:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
+ 729              		.loc 1 169 0
+ 730 0292 FFF7FEFF 		bl	ascii_wait_ready
+ 170:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 0x0C);    /*display on*/
+ 731              		.loc 1 170 0
+ 732 0296 0C20     		movs	r0, #12
+ 733 0298 FFF7FEFF 		bl	ascii_write_cmd
+ 171:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
+ 734              		.loc 1 171 0
+ 735 029c 2720     		movs	r0, #39
+ 736 029e FFF7FEFF 		bl	delay_mikro
+ 172:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
+ 737              		.loc 1 172 0
+ 738 02a2 FFF7FEFF 		bl	ascii_wait_ready
+ 173:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 0x38);    /*function set*/
+ 739              		.loc 1 173 0
+ 740 02a6 3820     		movs	r0, #56
+ 741 02a8 FFF7FEFF 		bl	ascii_write_cmd
+ 174:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
+ 742              		.loc 1 174 0
+ 743 02ac 2720     		movs	r0, #39
+ 744 02ae FFF7FEFF 		bl	delay_mikro
  175:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
- 737              		.loc 1 175 0
- 738 02aa FFF7FEFF 		bl	ascii_wait_ready
- 176:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     unsigned char address;
- 177:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     if(y != 1){
- 739              		.loc 1 177 0
- 740 02ae BB1D     		adds	r3, r7, #6
- 741 02b0 1B78     		ldrb	r3, [r3]
- 742 02b2 012B     		cmp	r3, #1
- 743 02b4 0BD0     		beq	.L34
- 178:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         address = 0x40 | (x-1);
- 744              		.loc 1 178 0
- 745 02b6 FB1D     		adds	r3, r7, #7
- 746 02b8 1B78     		ldrb	r3, [r3]
- 747 02ba 013B     		subs	r3, r3, #1
- 748 02bc DBB2     		uxtb	r3, r3
- 749 02be 5BB2     		sxtb	r3, r3
- 750 02c0 4022     		movs	r2, #64
- 751 02c2 1343     		orrs	r3, r2
- 752 02c4 5AB2     		sxtb	r2, r3
- 753 02c6 0F23     		movs	r3, #15
- 754 02c8 FB18     		adds	r3, r7, r3
- 755 02ca 1A70     		strb	r2, [r3]
- 756 02cc 05E0     		b	.L35
- 757              	.L34:
- 179:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     }
- 180:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     else{
- 181:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         address = x-1;
- 758              		.loc 1 181 0
- 759 02ce 0F23     		movs	r3, #15
- 760 02d0 FB18     		adds	r3, r7, r3
- 761 02d2 FA1D     		adds	r2, r7, #7
- 762 02d4 1278     		ldrb	r2, [r2]
- 763 02d6 013A     		subs	r2, r2, #1
- 764 02d8 1A70     		strb	r2, [r3]
- 765              	.L35:
- 182:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     }
- 183:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     
- 184:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd ( 0x80 | address);
- 766              		.loc 1 184 0
- 767 02da 0F23     		movs	r3, #15
- 768 02dc FB18     		adds	r3, r7, r3
- 769 02de 1B78     		ldrb	r3, [r3]
- 770 02e0 8022     		movs	r2, #128
- 771 02e2 5242     		rsbs	r2, r2, #0
- 772 02e4 1343     		orrs	r3, r2
- 773 02e6 DBB2     		uxtb	r3, r3
- 774 02e8 1800     		movs	r0, r3
- 775 02ea FFF7FEFF 		bl	ascii_write_cmd
- 185:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
- 776              		.loc 1 185 0
- 777 02ee C046     		nop
- 778 02f0 BD46     		mov	sp, r7
- 779 02f2 04B0     		add	sp, sp, #16
- 780              		@ sp needed
- 781 02f4 80BD     		pop	{r7, pc}
- 782              		.cfi_endproc
- 783              	.LFE14:
- 785              		.align	1
- 786              		.global	init_app
- 787              		.syntax unified
- 788              		.code	16
- 789              		.thumb_func
- 790              		.fpu softvfp
- 792              	init_app:
- 793              	.LFB15:
- 186:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
- 187:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void init_app( void )
- 188:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
- 794              		.loc 1 188 0
- 795              		.cfi_startproc
- 796              		@ args = 0, pretend = 0, frame = 0
- 797              		@ frame_needed = 1, uses_anonymous_args = 0
- 798 02f6 80B5     		push	{r7, lr}
- 799              		.cfi_def_cfa_offset 8
- 800              		.cfi_offset 7, -8
- 801              		.cfi_offset 14, -4
- 802 02f8 00AF     		add	r7, sp, #0
- 803              		.cfi_def_cfa_register 7
- 189:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portModer      = 0x00005555;
- 804              		.loc 1 189 0
- 805 02fa 074B     		ldr	r3, .L37
- 806 02fc 074A     		ldr	r2, .L37+4
- 807 02fe 1A60     		str	r2, [r3]
- 190:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portOtyper     = 0x00000000;
- 808              		.loc 1 190 0
- 809 0300 074B     		ldr	r3, .L37+8
- 810 0302 0022     		movs	r2, #0
- 811 0304 1A80     		strh	r2, [r3]
- 191:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portOspeedr    = 0x00005555;
- 812              		.loc 1 191 0
- 813 0306 074B     		ldr	r3, .L37+12
- 814 0308 044A     		ldr	r2, .L37+4
- 815 030a 1A60     		str	r2, [r3]
- 192:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portPupdr      = 0x55550000;
- 816              		.loc 1 192 0
- 817 030c 064B     		ldr	r3, .L37+16
- 818 030e 074A     		ldr	r2, .L37+20
- 819 0310 1A60     		str	r2, [r3]
- 193:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
- 820              		.loc 1 193 0
- 821 0312 C046     		nop
- 822 0314 BD46     		mov	sp, r7
- 823              		@ sp needed
- 824 0316 80BD     		pop	{r7, pc}
- 825              	.L38:
- 826              		.align	2
- 827              	.L37:
- 828 0318 00100240 		.word	1073876992
- 829 031c 55550000 		.word	21845
- 830 0320 04100240 		.word	1073876996
- 831 0324 08100240 		.word	1073877000
- 832 0328 0C100240 		.word	1073877004
- 833 032c 00005555 		.word	1431633920
- 834              		.cfi_endproc
- 835              	.LFE15:
- 837              		.section	.rodata
- 838              		.align	2
- 839              	.LC0:
- 840 0000 416C6661 		.ascii	"Alfanumerisk\000"
- 840      6E756D65 
- 840      7269736B 
- 840      00
- 841 000d 000000   		.align	2
- 842              	.LC2:
- 843 0010 44697370 		.ascii	"Display - test\000"
- 843      6C617920 
- 843      2D207465 
- 843      737400
- 844              		.text
- 845              		.align	1
- 846              		.global	main
- 847              		.syntax unified
- 848              		.code	16
- 849              		.thumb_func
- 850              		.fpu softvfp
- 852              	main:
- 853              	.LFB16:
- 194:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
- 195:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
- 196:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** int main(int argc, char **argv)
- 197:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
- 854              		.loc 1 197 0
- 855              		.cfi_startproc
- 856              		@ args = 0, pretend = 0, frame = 48
- 857              		@ frame_needed = 1, uses_anonymous_args = 0
- 858 0330 90B5     		push	{r4, r7, lr}
- 859              		.cfi_def_cfa_offset 12
- 860              		.cfi_offset 4, -12
- 861              		.cfi_offset 7, -8
- 862              		.cfi_offset 14, -4
- 863 0332 8DB0     		sub	sp, sp, #52
- 864              		.cfi_def_cfa_offset 64
- 865 0334 00AF     		add	r7, sp, #0
- 866              		.cfi_def_cfa_register 7
- 867 0336 7860     		str	r0, [r7, #4]
- 868 0338 3960     		str	r1, [r7]
- 198:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     char *s;
- 199:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     char test1[] = "Alfanumerisk";
- 869              		.loc 1 199 0
- 870 033a 1C23     		movs	r3, #28
- 871 033c FB18     		adds	r3, r7, r3
- 872 033e 1E4A     		ldr	r2, .L45
- 873 0340 13CA     		ldmia	r2!, {r0, r1, r4}
- 874 0342 13C3     		stmia	r3!, {r0, r1, r4}
- 875 0344 1278     		ldrb	r2, [r2]
- 876 0346 1A70     		strb	r2, [r3]
- 200:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     char test2[] = "Display - test";
- 877              		.loc 1 200 0
- 878 0348 0C23     		movs	r3, #12
- 879 034a FB18     		adds	r3, r7, r3
- 880 034c 1B4A     		ldr	r2, .L45+4
- 881 034e 13CA     		ldmia	r2!, {r0, r1, r4}
- 882 0350 13C3     		stmia	r3!, {r0, r1, r4}
- 883 0352 1188     		ldrh	r1, [r2]
- 884 0354 1980     		strh	r1, [r3]
- 885 0356 9278     		ldrb	r2, [r2, #2]
- 886 0358 9A70     		strb	r2, [r3, #2]
- 201:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     
- 202:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     init_app();
- 887              		.loc 1 202 0
- 888 035a FFF7FEFF 		bl	init_app
- 203:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_init();
- 889              		.loc 1 203 0
- 890 035e FFF7FEFF 		bl	ascii_init
- 204:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_gotoxy(1,1);
- 891              		.loc 1 204 0
- 892 0362 0121     		movs	r1, #1
- 893 0364 0120     		movs	r0, #1
- 894 0366 FFF7FEFF 		bl	ascii_gotoxy
- 205:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     s = test1;
- 895              		.loc 1 205 0
- 896 036a 1C23     		movs	r3, #28
- 897 036c FB18     		adds	r3, r7, r3
- 898 036e FB62     		str	r3, [r7, #44]
- 206:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while( *s )
- 899              		.loc 1 206 0
- 900 0370 06E0     		b	.L40
- 901              	.L41:
- 207:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         ascii_write_char( *s++ );
- 902              		.loc 1 207 0
- 903 0372 FB6A     		ldr	r3, [r7, #44]
- 904 0374 5A1C     		adds	r2, r3, #1
- 905 0376 FA62     		str	r2, [r7, #44]
- 906 0378 1B78     		ldrb	r3, [r3]
- 907 037a 1800     		movs	r0, r3
- 908 037c FFF7FEFF 		bl	ascii_write_char
- 909              	.L40:
- 206:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while( *s )
- 910              		.loc 1 206 0
- 911 0380 FB6A     		ldr	r3, [r7, #44]
- 912 0382 1B78     		ldrb	r3, [r3]
- 913 0384 002B     		cmp	r3, #0
- 914 0386 F4D1     		bne	.L41
- 208:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_gotoxy(1,2);
- 915              		.loc 1 208 0
- 916 0388 0221     		movs	r1, #2
- 917 038a 0120     		movs	r0, #1
- 918 038c FFF7FEFF 		bl	ascii_gotoxy
- 209:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     s = test2;
- 919              		.loc 1 209 0
- 920 0390 0C23     		movs	r3, #12
- 921 0392 FB18     		adds	r3, r7, r3
- 922 0394 FB62     		str	r3, [r7, #44]
- 210:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while (*s)
- 923              		.loc 1 210 0
- 924 0396 06E0     		b	.L42
- 925              	.L43:
- 211:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         ascii_write_char( *s++ );
- 926              		.loc 1 211 0
- 927 0398 FB6A     		ldr	r3, [r7, #44]
- 928 039a 5A1C     		adds	r2, r3, #1
- 929 039c FA62     		str	r2, [r7, #44]
- 930 039e 1B78     		ldrb	r3, [r3]
- 931 03a0 1800     		movs	r0, r3
- 932 03a2 FFF7FEFF 		bl	ascii_write_char
- 933              	.L42:
- 210:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while (*s)
- 934              		.loc 1 210 0
- 935 03a6 FB6A     		ldr	r3, [r7, #44]
- 936 03a8 1B78     		ldrb	r3, [r3]
- 937 03aa 002B     		cmp	r3, #0
- 938 03ac F4D1     		bne	.L43
- 212:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     return 0;
- 939              		.loc 1 212 0
- 940 03ae 0023     		movs	r3, #0
- 213:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
- 941              		.loc 1 213 0
- 942 03b0 1800     		movs	r0, r3
- 943 03b2 BD46     		mov	sp, r7
- 944 03b4 0DB0     		add	sp, sp, #52
- 945              		@ sp needed
- 946 03b6 90BD     		pop	{r4, r7, pc}
- 947              	.L46:
- 948              		.align	2
- 949              	.L45:
- 950 03b8 00000000 		.word	.LC0
- 951 03bc 10000000 		.word	.LC2
- 952              		.cfi_endproc
- 953              	.LFE16:
- 955              	.Letext0:
+ 745              		.loc 1 175 0
+ 746 02b2 FFF7FEFF 		bl	ascii_wait_ready
+ 176:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 1 );    /*clear display*/
+ 747              		.loc 1 176 0
+ 748 02b6 0120     		movs	r0, #1
+ 749 02b8 FFF7FEFF 		bl	ascii_write_cmd
+ 177:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_milli(2);
+ 750              		.loc 1 177 0
+ 751 02bc 0220     		movs	r0, #2
+ 752 02be FFF7FEFF 		bl	delay_milli
+ 178:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
+ 753              		.loc 1 178 0
+ 754 02c2 FFF7FEFF 		bl	ascii_wait_ready
+ 179:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd( 6 );    /*entry mode set*/
+ 755              		.loc 1 179 0
+ 756 02c6 0620     		movs	r0, #6
+ 757 02c8 FFF7FEFF 		bl	ascii_write_cmd
+ 180:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     delay_mikro(39);
+ 758              		.loc 1 180 0
+ 759 02cc 2720     		movs	r0, #39
+ 760 02ce FFF7FEFF 		bl	delay_mikro
+ 181:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
+ 761              		.loc 1 181 0
+ 762 02d2 C046     		nop
+ 763 02d4 BD46     		mov	sp, r7
+ 764              		@ sp needed
+ 765 02d6 80BD     		pop	{r7, pc}
+ 766              		.cfi_endproc
+ 767              	.LFE14:
+ 769              		.align	1
+ 770              		.global	ascii_gotoxy
+ 771              		.syntax unified
+ 772              		.code	16
+ 773              		.thumb_func
+ 774              		.fpu softvfp
+ 776              	ascii_gotoxy:
+ 777              	.LFB15:
+ 182:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
+ 183:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void ascii_gotoxy( unsigned char x, unsigned char y)
+ 184:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
+ 778              		.loc 1 184 0
+ 779              		.cfi_startproc
+ 780              		@ args = 0, pretend = 0, frame = 16
+ 781              		@ frame_needed = 1, uses_anonymous_args = 0
+ 782 02d8 80B5     		push	{r7, lr}
+ 783              		.cfi_def_cfa_offset 8
+ 784              		.cfi_offset 7, -8
+ 785              		.cfi_offset 14, -4
+ 786 02da 84B0     		sub	sp, sp, #16
+ 787              		.cfi_def_cfa_offset 24
+ 788 02dc 00AF     		add	r7, sp, #0
+ 789              		.cfi_def_cfa_register 7
+ 790 02de 0200     		movs	r2, r0
+ 791 02e0 FB1D     		adds	r3, r7, #7
+ 792 02e2 1A70     		strb	r2, [r3]
+ 793 02e4 BB1D     		adds	r3, r7, #6
+ 794 02e6 0A1C     		adds	r2, r1, #0
+ 795 02e8 1A70     		strb	r2, [r3]
+ 185:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_wait_ready();
+ 796              		.loc 1 185 0
+ 797 02ea FFF7FEFF 		bl	ascii_wait_ready
+ 186:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     unsigned char address;
+ 187:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     if(y != 1){
+ 798              		.loc 1 187 0
+ 799 02ee BB1D     		adds	r3, r7, #6
+ 800 02f0 1B78     		ldrb	r3, [r3]
+ 801 02f2 012B     		cmp	r3, #1
+ 802 02f4 0BD0     		beq	.L38
+ 188:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         address = 0x40 | (x-1);
+ 803              		.loc 1 188 0
+ 804 02f6 FB1D     		adds	r3, r7, #7
+ 805 02f8 1B78     		ldrb	r3, [r3]
+ 806 02fa 013B     		subs	r3, r3, #1
+ 807 02fc DBB2     		uxtb	r3, r3
+ 808 02fe 5BB2     		sxtb	r3, r3
+ 809 0300 4022     		movs	r2, #64
+ 810 0302 1343     		orrs	r3, r2
+ 811 0304 5AB2     		sxtb	r2, r3
+ 812 0306 0F23     		movs	r3, #15
+ 813 0308 FB18     		adds	r3, r7, r3
+ 814 030a 1A70     		strb	r2, [r3]
+ 815 030c 05E0     		b	.L39
+ 816              	.L38:
+ 189:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     }
+ 190:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     else{
+ 191:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         address = x-1;
+ 817              		.loc 1 191 0
+ 818 030e 0F23     		movs	r3, #15
+ 819 0310 FB18     		adds	r3, r7, r3
+ 820 0312 FA1D     		adds	r2, r7, #7
+ 821 0314 1278     		ldrb	r2, [r2]
+ 822 0316 013A     		subs	r2, r2, #1
+ 823 0318 1A70     		strb	r2, [r3]
+ 824              	.L39:
+ 192:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     }
+ 193:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     
+ 194:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_write_cmd ( 0x80 | address);
+ 825              		.loc 1 194 0
+ 826 031a 0F23     		movs	r3, #15
+ 827 031c FB18     		adds	r3, r7, r3
+ 828 031e 1B78     		ldrb	r3, [r3]
+ 829 0320 8022     		movs	r2, #128
+ 830 0322 5242     		rsbs	r2, r2, #0
+ 831 0324 1343     		orrs	r3, r2
+ 832 0326 DBB2     		uxtb	r3, r3
+ 833 0328 1800     		movs	r0, r3
+ 834 032a FFF7FEFF 		bl	ascii_write_cmd
+ 195:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
+ 835              		.loc 1 195 0
+ 836 032e C046     		nop
+ 837 0330 BD46     		mov	sp, r7
+ 838 0332 04B0     		add	sp, sp, #16
+ 839              		@ sp needed
+ 840 0334 80BD     		pop	{r7, pc}
+ 841              		.cfi_endproc
+ 842              	.LFE15:
+ 844              		.align	1
+ 845              		.global	init_app
+ 846              		.syntax unified
+ 847              		.code	16
+ 848              		.thumb_func
+ 849              		.fpu softvfp
+ 851              	init_app:
+ 852              	.LFB16:
+ 196:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
+ 197:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** void init_app( void )
+ 198:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
+ 853              		.loc 1 198 0
+ 854              		.cfi_startproc
+ 855              		@ args = 0, pretend = 0, frame = 0
+ 856              		@ frame_needed = 1, uses_anonymous_args = 0
+ 857 0336 80B5     		push	{r7, lr}
+ 858              		.cfi_def_cfa_offset 8
+ 859              		.cfi_offset 7, -8
+ 860              		.cfi_offset 14, -4
+ 861 0338 00AF     		add	r7, sp, #0
+ 862              		.cfi_def_cfa_register 7
+ 199:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portModer      = 0x00005555;
+ 863              		.loc 1 199 0
+ 864 033a 074B     		ldr	r3, .L41
+ 865 033c 074A     		ldr	r2, .L41+4
+ 866 033e 1A60     		str	r2, [r3]
+ 200:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portOtyper     = 0x00000000;
+ 867              		.loc 1 200 0
+ 868 0340 074B     		ldr	r3, .L41+8
+ 869 0342 0022     		movs	r2, #0
+ 870 0344 1A80     		strh	r2, [r3]
+ 201:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portOspeedr    = 0x00005555;
+ 871              		.loc 1 201 0
+ 872 0346 074B     		ldr	r3, .L41+12
+ 873 0348 044A     		ldr	r2, .L41+4
+ 874 034a 1A60     		str	r2, [r3]
+ 202:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     *portPupdr      = 0x55550000;
+ 875              		.loc 1 202 0
+ 876 034c 064B     		ldr	r3, .L41+16
+ 877 034e 074A     		ldr	r2, .L41+20
+ 878 0350 1A60     		str	r2, [r3]
+ 203:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
+ 879              		.loc 1 203 0
+ 880 0352 C046     		nop
+ 881 0354 BD46     		mov	sp, r7
+ 882              		@ sp needed
+ 883 0356 80BD     		pop	{r7, pc}
+ 884              	.L42:
+ 885              		.align	2
+ 886              	.L41:
+ 887 0358 00100240 		.word	1073876992
+ 888 035c 55550000 		.word	21845
+ 889 0360 04100240 		.word	1073876996
+ 890 0364 08100240 		.word	1073877000
+ 891 0368 0C100240 		.word	1073877004
+ 892 036c 00005555 		.word	1431633920
+ 893              		.cfi_endproc
+ 894              	.LFE16:
+ 896              		.section	.rodata
+ 897              		.align	2
+ 898              	.LC0:
+ 899 0000 416C6661 		.ascii	"Alfanumerisk\000"
+ 899      6E756D65 
+ 899      7269736B 
+ 899      00
+ 900 000d 000000   		.align	2
+ 901              	.LC2:
+ 902 0010 44697370 		.ascii	"Display - test\000"
+ 902      6C617920 
+ 902      2D207465 
+ 902      737400
+ 903              		.text
+ 904              		.align	1
+ 905              		.global	main
+ 906              		.syntax unified
+ 907              		.code	16
+ 908              		.thumb_func
+ 909              		.fpu softvfp
+ 911              	main:
+ 912              	.LFB17:
+ 204:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
+ 205:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** 
+ 206:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** int main(int argc, char **argv)
+ 207:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** {
+ 913              		.loc 1 207 0
+ 914              		.cfi_startproc
+ 915              		@ args = 0, pretend = 0, frame = 48
+ 916              		@ frame_needed = 1, uses_anonymous_args = 0
+ 917 0370 90B5     		push	{r4, r7, lr}
+ 918              		.cfi_def_cfa_offset 12
+ 919              		.cfi_offset 4, -12
+ 920              		.cfi_offset 7, -8
+ 921              		.cfi_offset 14, -4
+ 922 0372 8DB0     		sub	sp, sp, #52
+ 923              		.cfi_def_cfa_offset 64
+ 924 0374 00AF     		add	r7, sp, #0
+ 925              		.cfi_def_cfa_register 7
+ 926 0376 7860     		str	r0, [r7, #4]
+ 927 0378 3960     		str	r1, [r7]
+ 208:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     char *s;
+ 209:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     char test1[] = "Alfanumerisk";
+ 928              		.loc 1 209 0
+ 929 037a 1C23     		movs	r3, #28
+ 930 037c FB18     		adds	r3, r7, r3
+ 931 037e 1E4A     		ldr	r2, .L49
+ 932 0380 13CA     		ldmia	r2!, {r0, r1, r4}
+ 933 0382 13C3     		stmia	r3!, {r0, r1, r4}
+ 934 0384 1278     		ldrb	r2, [r2]
+ 935 0386 1A70     		strb	r2, [r3]
+ 210:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     char test2[] = "Display - test";
+ 936              		.loc 1 210 0
+ 937 0388 0C23     		movs	r3, #12
+ 938 038a FB18     		adds	r3, r7, r3
+ 939 038c 1B4A     		ldr	r2, .L49+4
+ 940 038e 13CA     		ldmia	r2!, {r0, r1, r4}
+ 941 0390 13C3     		stmia	r3!, {r0, r1, r4}
+ 942 0392 1188     		ldrh	r1, [r2]
+ 943 0394 1980     		strh	r1, [r3]
+ 944 0396 9278     		ldrb	r2, [r2, #2]
+ 945 0398 9A70     		strb	r2, [r3, #2]
+ 211:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     
+ 212:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     init_app();
+ 946              		.loc 1 212 0
+ 947 039a FFF7FEFF 		bl	init_app
+ 213:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_init();
+ 948              		.loc 1 213 0
+ 949 039e FFF7FEFF 		bl	ascii_init
+ 214:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_gotoxy(1,1);
+ 950              		.loc 1 214 0
+ 951 03a2 0121     		movs	r1, #1
+ 952 03a4 0120     		movs	r0, #1
+ 953 03a6 FFF7FEFF 		bl	ascii_gotoxy
+ 215:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     s = test1;
+ 954              		.loc 1 215 0
+ 955 03aa 1C23     		movs	r3, #28
+ 956 03ac FB18     		adds	r3, r7, r3
+ 957 03ae FB62     		str	r3, [r7, #44]
+ 216:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while( *s )
+ 958              		.loc 1 216 0
+ 959 03b0 06E0     		b	.L44
+ 960              	.L45:
+ 217:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         ascii_write_char( *s++ );
+ 961              		.loc 1 217 0
+ 962 03b2 FB6A     		ldr	r3, [r7, #44]
+ 963 03b4 5A1C     		adds	r2, r3, #1
+ 964 03b6 FA62     		str	r2, [r7, #44]
+ 965 03b8 1B78     		ldrb	r3, [r3]
+ 966 03ba 1800     		movs	r0, r3
+ 967 03bc FFF7FEFF 		bl	ascii_write_char
+ 968              	.L44:
+ 216:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while( *s )
+ 969              		.loc 1 216 0
+ 970 03c0 FB6A     		ldr	r3, [r7, #44]
+ 971 03c2 1B78     		ldrb	r3, [r3]
+ 972 03c4 002B     		cmp	r3, #0
+ 973 03c6 F4D1     		bne	.L45
+ 218:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     ascii_gotoxy(1,2);
+ 974              		.loc 1 218 0
+ 975 03c8 0221     		movs	r1, #2
+ 976 03ca 0120     		movs	r0, #1
+ 977 03cc FFF7FEFF 		bl	ascii_gotoxy
+ 219:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     s = test2;
+ 978              		.loc 1 219 0
+ 979 03d0 0C23     		movs	r3, #12
+ 980 03d2 FB18     		adds	r3, r7, r3
+ 981 03d4 FB62     		str	r3, [r7, #44]
+ 220:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while (*s)
+ 982              		.loc 1 220 0
+ 983 03d6 06E0     		b	.L46
+ 984              	.L47:
+ 221:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****         ascii_write_char( *s++ );
+ 985              		.loc 1 221 0
+ 986 03d8 FB6A     		ldr	r3, [r7, #44]
+ 987 03da 5A1C     		adds	r2, r3, #1
+ 988 03dc FA62     		str	r2, [r7, #44]
+ 989 03de 1B78     		ldrb	r3, [r3]
+ 990 03e0 1800     		movs	r0, r3
+ 991 03e2 FFF7FEFF 		bl	ascii_write_char
+ 992              	.L46:
+ 220:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     while (*s)
+ 993              		.loc 1 220 0
+ 994 03e6 FB6A     		ldr	r3, [r7, #44]
+ 995 03e8 1B78     		ldrb	r3, [r3]
+ 996 03ea 002B     		cmp	r3, #0
+ 997 03ec F4D1     		bne	.L47
+ 222:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c ****     return 0;
+ 998              		.loc 1 222 0
+ 999 03ee 0023     		movs	r3, #0
+ 223:C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii\startup.c **** }
+ 1000              		.loc 1 223 0
+ 1001 03f0 1800     		movs	r0, r3
+ 1002 03f2 BD46     		mov	sp, r7
+ 1003 03f4 0DB0     		add	sp, sp, #52
+ 1004              		@ sp needed
+ 1005 03f6 90BD     		pop	{r4, r7, pc}
+ 1006              	.L50:
+ 1007              		.align	2
+ 1008              	.L49:
+ 1009 03f8 00000000 		.word	.LC0
+ 1010 03fc 10000000 		.word	.LC2
+ 1011              		.cfi_endproc
+ 1012              	.LFE17:
+ 1014              	.Letext0:

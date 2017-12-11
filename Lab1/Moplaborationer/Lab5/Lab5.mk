@@ -3,17 +3,17 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=ascii
+ProjectName            :=Lab5
 ConfigurationName      :=Debug
 WorkspacePath          :=C:/Users/nicla/DAT017/Lab1/Moplaborationer
-ProjectPath            :=C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii
+ProjectPath            :=C:/Users/nicla/DAT017/Lab1/Moplaborationer/Lab5
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=nicla
-Date                   :=04/12/2017
+Date                   :=06/12/2017
 CodeLitePath           :=C:/cseapp/CodeLite
 LinkerName             :=$(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-g++.exe
 SharedObjectLinkerName :=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi-g++.exe -shared -fPIC
@@ -32,7 +32,7 @@ Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :="ascii.txt"
+ObjectsFileList        :="Lab5.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := 
@@ -86,8 +86,8 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 
 PostBuild:
 	@echo Executing Post Build commands ...
-	arm-none-eabi-objcopy -S -O srec  ./Debug/ascii.elf ./Debug/ascii.s19
-	arm-none-eabi-objdump -D -S ./Debug/ascii.elf > ./Debug/ascii.dass
+	arm-none-eabi-objcopy -S -O srec  ./Debug/Lab5.elf ./Debug/Lab5.s19
+	arm-none-eabi-objdump -D -S ./Debug/Lab5.elf > ./Debug/Lab5.dass
 	@echo Done
 
 MakeIntermediateDirs:
@@ -104,7 +104,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/nicla/DAT017/Lab1/Moplaborationer/ascii/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/nicla/DAT017/Lab1/Moplaborationer/Lab5/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
 

@@ -4,6 +4,8 @@
  */
  typedef unsigned char uint8_t;
  
+ #include "graphicsDriver.h"
+ 
 #define STK_CTRL ((volatile unsigned int *)(0xE000E010))
 #define STK_LOAD ((volatile unsigned int *)(0xE000E014))
 #define STK_VAL ((volatile unsigned int *)(0xE000E018)) 
@@ -43,16 +45,19 @@
 #define LCD_DISP_START 0xC0 // Start address
 #define LCD_BUSY 0x80 // Read busy status
 #define MAX_POINTS 20
+
 typedef struct tPoint{
     unsigned char x;
     unsigned char y;
 }POINT;
+
 typedef struct tGeometry{
      int numpoints;
      int sizex;
      int sizey;
      POINT px[MAX_POINTS];
     }GEOMETRY, *PGEOMETRY;
+    
 typedef struct tObj{
     PGEOMETRY geo;
     int dirx,diry;
@@ -62,6 +67,7 @@ typedef struct tObj{
     void (* move)(struct tObj *);
     void (* set_speed)(struct tObj * , int, int);
     }OBJECT, *POBJECT;
+    
 GEOMETRY ball_geometry = {
     12,
     4,4,
@@ -72,10 +78,19 @@ GEOMETRY ball_geometry = {
         {3,2}
     }
     };
+    GEOMETRY paddle_geometry = {
+    0,
+    2,10,
+    {
+        {0,0}
+    }
+    };
+    
 void set_object_speed(POBJECT p, int x, int y){
     p->dirx = x;
     p->diry = y;
     }
+    
 void draw_object(POBJECT p){
      POINT *ptr = p->geo->px;
     for(int i = 0; i < p->geo->numpoints; i++){
@@ -112,16 +127,59 @@ void move_object(POBJECT p){
     
     draw_object(p);
     }
+    void move_paddle_object(POBJECT p){
+    clear_rect_object(p);
+    
+    p->posx = p->posx + p->dirx;
+    p->posy = p->posy + p->diry;
+    int px = p->posx;
+    int py = p->posy;
+    
+    draw_rect_object(p);
+    }
+void draw_rect_object(POBJECT pa){
+    for(int ii = 0; ii < pa->geo->sizex; ii++){
+        for(int jj = 0 ;  jj < pa->geo->sizey; jj++){
+            pixel(pa->posx + ii, pa->posy + jj, 1);
+            }
+        }
+    }
+    void clear_rect_object(POBJECT pa){
+    for(int ii = 0; ii < pa->geo->sizex; ii++){
+        for(int jj = 0 ;  jj < pa->geo->sizey; jj++){
+            pixel(pa->posx + ii, pa->posy + jj, 0);
+            }
+        }
+    }
     static OBJECT ball = {
     &ball_geometry,
     0,0,
-    1,1,
-    draw_object,
+    80,10,
+    draw_rect_object,
     clear_object,
     move_object,
     set_object_speed
     };
-
+    static OBJECT paddle1 = {
+        &paddle_geometry,
+        0,0,
+        3,30,
+        draw_rect_object,
+        clear_rect_object,
+        move_paddle_object,
+        set_object_speed
+        };
+         static OBJECT paddle2 = {
+        &paddle_geometry,
+        0,0,
+        125,30,
+        draw_rect_object,
+        clear_rect_object,
+        move_paddle_object,
+        set_object_speed
+        };
+    int point1 = 0;
+    int point2 = 0;
 void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
 
 void startup ( void )
@@ -136,8 +194,9 @@ __asm volatile(
 void init_app(void){
     *GPIOE_MODER = 0x55555555;
 	/*sätter våra in och ut portar*/
-	//*GPIOE_OTYPER = 0x70;
-	//*GPIOE_PUPDR = 0x0AA;
+	*GPIOE_OTYPER = 0x00000000;
+	*GPIOE_PUPDR = 0x55550000;
+    *GPIOE_OSPEDER = 0x00005555;
 	//*GPIOE_ODR_HIGH = *GPIOE_ODR_HIGH & 0x00FF;
     
     *GPIOD_MODER = 0x55005555;
@@ -145,6 +204,7 @@ void init_app(void){
 	*GPIOD_OTYPER = 0x70;
 	*GPIOD_PUPDR = 0x0AA;
 	*GPIOD_ODR_HIGH = *GPIOD_ODR_HIGH & 0x00FF;
+    
     }
     int getCol ( void )
 {
@@ -187,14 +247,66 @@ void activateRow ( unsigned int row )
 	return 0xFF;
 }
 void main(void)
-{
+{   
     init_app();
+
     char c;
     POBJECT p = &ball;
+    POBJECT pa1 = &paddle1;
+    POBJECT pa2 = &paddle2;
     graphic_initialize();
-    graphic_clear_screen();// Hårdvara bara
+    ascii_init();
+   updatePoints();
+   graphic_clear_screen();// simulator onely
+    pa1->draw(pa1);
+    pa2->draw(pa2);
+    p->set_speed(p,5,0);
+ while(1){
+     checkForGoals(p);
     
-
+    p->move(p);
+    pa1->move(pa1);
+    pa2->move(pa2);
+     delay_milli(40);
+     c = keyb();
+     switch(c)
+     {
+         case 1: pa1->set_speed(pa1,0,-2);
+         break;
+         case 7: pa1->set_speed(pa1,0,2);
+         break;
+         //case 3: pa2->set_speed(pa2,0,-2);
+         //case 9: pa2->set_speed(pa2,0,2);
+         }
+         if(pa2->posy < p->posy){
+             pa2->set_speed(pa2, 0, 2);
+             }
+             if(pa2->posy > p->posy){
+             pa2->set_speed(pa2, 0, -2);
+             }
+         if(p->posy < 1){
+             p->set_speed(p,p->dirx,2);
+             }
+            if(p->posy > 60){
+             p->set_speed(p,p->dirx,-2);
+             }
+             int yy = p->posy;
+             int yy2 = pa2->posy;
+             if(p->posx < 6 ){
+                 if((p->posy+2) > pa1->posy ){
+                     if( (p->posy +2)<( pa1->posy +10)){
+                        p->set_speed(p, 2, p->diry);
+                     }
+                 }
+            }
+            if(p->posx > 119){
+                 if((p->posy+2) > pa2->posy ){
+                     if( (p->posy +2)<( pa2->posy +10)){
+                        p->set_speed(p, -2, p->diry);
+                     }
+                 }
+            }
+     }      
     
 }
 
@@ -215,6 +327,8 @@ void delay_mikro(unsigned int us)
     us = us / 1000;
     us++;
 #endif
+us = us / 1000;
+    us++;
     while(us < 0){
         {
             delay_250ns();
@@ -244,135 +358,7 @@ void delay_500ns(void){
     delay_250ns();
     delay_250ns();
     }
-static void graphic_ctrl_bit_set(uint8_t x) {
-uint8_t c;
-c = *GPIOE_ODR_LOW;
-c &= ~B_SELECT;
-c |= (~B_SELECT & x);
-*GPIOE_ODR_LOW = c;
-}
-static void graphic_ctrl_bit_clear(uint8_t x) {
-uint8_t c;
-c = *GPIOE_ODR_LOW;
-c &= ~B_SELECT;
-c &= ~x;
-*GPIOE_ODR_LOW = c;
-}
-static void select_controller(uint8_t controller){
-    switch(controller){
-    case 0:
-    graphic_ctrl_bit_clear(B_CS1|B_CS2);
-    break;
-    case B_CS1 :
-    graphic_ctrl_bit_set(B_CS1);
-    graphic_ctrl_bit_clear(B_CS2);
-    break;
-    case B_CS2 :
-    graphic_ctrl_bit_set(B_CS2);
-    graphic_ctrl_bit_clear(B_CS1);
-    break;
-    case B_CS1|B_CS2 :
-    graphic_ctrl_bit_set(B_CS1|B_CS2);
-    break;
-}
-}
-void graphic_initialize(void) {
-graphic_ctrl_bit_set(B_E);
-delay_mikro(10);
-graphic_ctrl_bit_clear(B_CS1|B_CS2|B_RST|B_E);
-delay_milli(30);
-graphic_ctrl_bit_set(B_RST);
-delay_milli(100);
-graphic_write_command(LCD_OFF, B_CS1|B_CS2);
-graphic_write_command(LCD_ON, B_CS1|B_CS2);
-graphic_write_command(LCD_DISP_START, B_CS1|B_CS2);
-graphic_write_command(LCD_SET_ADD, B_CS1|B_CS2);
-graphic_write_command(LCD_SET_PAGE, B_CS1|B_CS2);
-select_controller(0);
-}
-static void graphic_wait_ready(void) {
-uint8_t c;
-graphic_ctrl_bit_clear(B_E);
-// 15-8 inputs, 7-0 outputs
-*GPIOE_MODER = 0x00005555;
-graphic_ctrl_bit_clear(B_RS);
-graphic_ctrl_bit_set(B_RW);
-delay_500ns();
-while(1) {
-graphic_ctrl_bit_set(B_E);
-delay_500ns();
-c = *GPIOE_IDR_HIGH & LCD_BUSY;
-graphic_ctrl_bit_clear(B_E);
-delay_500ns();
-if( c == 0 ) break;
-}
-*GPIOE_MODER = 0x55555555; // 15-0 outputs
-}
-static uint8_t graphic_read(uint8_t controller) {
-uint8_t c;
-graphic_ctrl_bit_clear(B_E);
-*GPIOE_MODER = 0x00005555; // 15-8 inputs, 7-0 outputs
-graphic_ctrl_bit_set(B_RS|B_RW);
-select_controller(controller);
-delay_500ns();
-graphic_ctrl_bit_set(B_E);
-delay_500ns();
-c = *GPIOE_IDR_HIGH;
-graphic_ctrl_bit_clear(B_E);
-*GPIOE_MODER = 0x55555555; // 15-0 outputs
-if( controller & B_CS1 ) {
-select_controller(B_CS1);
-graphic_wait_ready();
-}
-if( controller & B_CS2 ) {
-select_controller(B_CS2);
-graphic_wait_ready();
-}
-return c;
-}
-static uint8_t graphic_read_data(uint8_t controller) {
-graphic_read(controller);
-return graphic_read(controller);
-}
-static void graphic_write(uint8_t value, uint8_t controller) {
-*GPIOE_ODR_HIGH = value;
-select_controller(controller);
-delay_500ns();
-graphic_ctrl_bit_set(B_E);
-delay_500ns();
-graphic_ctrl_bit_clear( B_E );
-if(controller & B_CS1) {
-select_controller( B_CS1);
-graphic_wait_ready();
-}
-if(controller & B_CS2) {
-select_controller( B_CS2);
-graphic_wait_ready();
-}
-}
-void graphic_write_command(uint8_t command, uint8_t controller) {
-graphic_ctrl_bit_clear(B_E);
-select_controller(controller);
-graphic_ctrl_bit_clear(B_RS|B_RW);
-graphic_write(command, controller);
-}
-void graphic_write_data(uint8_t data, uint8_t controller) {
-graphic_ctrl_bit_clear(B_E);
-select_controller(controller);
-graphic_ctrl_bit_set(B_RS);
-graphic_ctrl_bit_clear(B_RW);
-graphic_write(data, controller);
-}
-void graphic_clear_screen(void) {
-uint8_t i, j;
-for(j = 0; j < 8; j++) {
-graphic_write_command(LCD_SET_PAGE | j, B_CS1|B_CS2);
-graphic_write_command(LCD_SET_ADD | 0, B_CS1|B_CS2);
-for(i = 0; i <= 63; i++){
-graphic_write_data(0, B_CS1|B_CS2);
-}
-}
-}
+
 void pixel(int x, int y, int set) {
 uint8_t mask, c, controller;
 int index;
@@ -407,6 +393,79 @@ else
 mask = mask & c;
 graphic_write_data(mask, controller);
 }
+void drawRect(int x, int y){}
 
 
-
+void checkForGoals(POBJECT p){
+    if(p->posx < 1){
+        point2++;
+        p->set_speed(p,2,3);
+        resetBall();
+        updatePoints();
+        }
+        if(p->posx > 120){
+            p->set_speed(p,-2,3);
+            resetBall();
+            point1 ++;
+            updatePoints();
+            }
+            if(point1 == 5){
+                 ascii_gotoxy(1,2);
+                ascii_write_char('P');
+                ascii_write_char('L');
+                ascii_write_char('A');
+                ascii_write_char('Y');
+                ascii_write_char('E');
+                ascii_write_char('R');
+                ascii_write_char(' ');
+                ascii_write_char('1');
+                ascii_write_char(' ');
+                ascii_write_char('W');
+                ascii_write_char('O');
+                ascii_write_char('N');
+                ascii_write_char('!');
+                p->set_speed(p,0,0);
+                waitForNewGame();
+                }
+                if(point2 == 5){
+                    
+                      ascii_gotoxy(1,2);
+                ascii_write_char('P');
+                ascii_write_char('L');
+                ascii_write_char('A');
+                ascii_write_char('Y');
+                ascii_write_char('E');
+                ascii_write_char('R');
+                ascii_write_char(' ');
+                ascii_write_char('2');
+                ascii_write_char(' ');
+                ascii_write_char('W');
+                ascii_write_char('O');
+                ascii_write_char('N');
+                ascii_write_char('!');
+                p->set_speed(p,0,0);
+                waitForNewGame();
+                }
+    }
+    void updatePoints(void){
+         ascii_gotoxy(8,1);
+        ascii_write_char(point1 + '0');
+        ascii_write_char(' ');
+        ascii_write_char('-');
+        ascii_write_char(' ');
+        ascii_write_char(point2 + '0');
+        }
+void resetBall(POBJECT p){
+    clear_object(p);
+    p->posx = 60;
+    p->posy = 30;
+}
+void waitForNewGame(void){
+    char c;
+    while(1){
+    c = keyb();
+    if(c == '0'){
+        main();
+        }
+    }
+    }
